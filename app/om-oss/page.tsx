@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Om oss",
@@ -122,6 +123,23 @@ export default function OmOssPage() {
               Grenland AS jobben — foreløpig innenfor vårt lokale nedslagsfelt
               i Grenland. Kunder fra resten av landet kan selvfølgelig handle
               produkter hos oss.
+            </p>
+          </div>
+
+          <div style={{ flex: "1 1 320px" }}>
+            <h2 style={{ color: "#0f172a", fontSize: "22px", fontWeight: "bold" }}>
+              Enova-støtte
+            </h2>
+            <p style={{ lineHeight: 1.7, color: "#374151", maxWidth: "480px" }}>
+              Siden høsten 2025 kan du søke Enova-støtte til nye vinduer og
+              ytterdører som et eget tiltak. Vi hjelper deg gjerne å sjekke om
+              boligen din kvalifiserer.{" "}
+              <Link
+                href="/enova-stotte"
+                style={{ color: "#0f766e", fontWeight: "bold" }}
+              >
+                Les mer om Enova-støtte →
+              </Link>
             </p>
           </div>
         </div>

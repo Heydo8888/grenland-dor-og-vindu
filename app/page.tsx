@@ -27,6 +27,7 @@ const fordeler = [
     ikon: "🌱",
     tittel: "Enova-støtte",
     tekst: "Vi hjelper deg å sjekke om oppgraderingen kan gi deg støtte.",
+    href: "/enova-stotte",
   },
 ];
 
@@ -201,6 +202,17 @@ export default function Home() {
                 }}
               >
                 {fordel.tekst}
+                {fordel.href && (
+                  <>
+                    {" "}
+                    <Link
+                      href={fordel.href}
+                      style={{ color: "#0f766e", fontWeight: "bold" }}
+                    >
+                      Les mer →
+                    </Link>
+                  </>
+                )}
               </p>
             </div>
           ))}

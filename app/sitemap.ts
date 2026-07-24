@@ -4,7 +4,14 @@ import { leverandorer } from "@/data/leverandorer";
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const sider = ["", "/produkter", "/om-oss", "/kontakt", "/tilbud"];
+  const sider = [
+    "",
+    "/produkter",
+    "/om-oss",
+    "/kontakt",
+    "/tilbud",
+    "/enova-stotte",
+  ];
 
   const statiske = sider.map((sti) => ({
     url: `${baseUrl}${sti}`,
