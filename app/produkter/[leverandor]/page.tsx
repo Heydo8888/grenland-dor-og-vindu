@@ -89,25 +89,53 @@ export default async function LeverandorPage({
           }}
         >
           Produktutvalget fra {leverandor.navn} publiseres her så snart vi har
-          mottatt produktbilder og -data fra leverandøren. Fram til da hjelper
-          vi deg gjerne direkte.
+          mottatt produktbilder og -data fra leverandøren. Fram til da kan du
+          se hele utvalget deres på nettsiden deres, eller be oss om et
+          tilbud direkte.
         </p>
 
-        <Link
-          href="/tilbud"
-          className="btn-primary"
+        <div
           style={{
-            display: "inline-block",
-            padding: "16px 32px",
-            backgroundColor: "#0f766e",
-            color: "white",
-            borderRadius: "10px",
-            fontSize: "16px",
-            textDecoration: "none",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "16px",
           }}
         >
-          Be om tilbud på {leverandor.navn}-produkter
-        </Link>
+          <Link
+            href="/tilbud"
+            className="btn-primary"
+            style={{
+              display: "inline-block",
+              padding: "16px 32px",
+              backgroundColor: "#0f766e",
+              color: "white",
+              borderRadius: "10px",
+              fontSize: "16px",
+              textDecoration: "none",
+            }}
+          >
+            Be om tilbud på {leverandor.navn}-produkter
+          </Link>
+
+          <a
+            href={leverandor.nettside}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+            style={{
+              display: "inline-block",
+              padding: "16px 32px",
+              backgroundColor: "white",
+              color: "#111827",
+              border: "1px solid #d1d5db",
+              borderRadius: "10px",
+              fontSize: "16px",
+              textDecoration: "none",
+            }}
+          >
+            Se {leverandor.navn} sin nettside ↗
+          </a>
+        </div>
       </div>
     </div>
   );
