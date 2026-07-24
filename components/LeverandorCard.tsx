@@ -37,6 +37,30 @@ export default function LeverandorCard({
           </p>
         )}
 
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "6px",
+            marginBottom: "12px",
+          }}
+        >
+          {leverandor.kategorier.map((kategori) => (
+            <span
+              key={kategori}
+              style={{
+                fontSize: "12px",
+                backgroundColor: "#f1f5f9",
+                color: "#0f172a",
+                padding: "3px 10px",
+                borderRadius: "999px",
+              }}
+            >
+              {kategori}
+            </span>
+          ))}
+        </div>
+
         <p style={{ margin: 0, fontSize: "14px", color: "#6b7280" }}>
           Se leverandøren →
         </p>

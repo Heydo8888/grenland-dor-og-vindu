@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { leverandorer } from "@/data/leverandorer";
+import KategoriKort from "@/components/KategoriKort";
 
 export function generateStaticParams() {
   return leverandorer.map((leverandor) => ({ leverandor: leverandor.id }));
@@ -21,7 +22,7 @@ export async function generateMetadata({
 
   return {
     title: leverandor.navn,
-    description: `Dører og vinduer fra ${leverandor.navn}${
+    description: `${leverandor.kategorier.join(", ")} fra ${leverandor.navn}${
       leverandor.sted ? ` (${leverandor.sted})` : ""
     }, levert av Grenland Dør og Vindu AS.`,
   };
@@ -80,6 +81,31 @@ export default async function LeverandorPage({
       </section>
 
       <div style={{ padding: "clamp(28px, 6vw, 60px)" }}>
+        <h2
+          style={{
+            color: "#0f172a",
+            fontSize: "20px",
+            fontWeight: "bold",
+            marginTop: 0,
+          }}
+        >
+          Produktkategorier
+        </h2>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+            gap: "16px",
+            maxWidth: "600px",
+            marginBottom: "30px",
+          }}
+        >
+          {leverandor.kategorier.map((kategori) => (
+            <KategoriKort key={kategori} kategori={kategori} />
+          ))}
+        </div>
+
         <p
           style={{
             maxWidth: "600px",
@@ -88,9 +114,9 @@ export default async function LeverandorPage({
             marginBottom: "30px",
           }}
         >
-          Produktutvalget fra {leverandor.navn} publiseres her så snart vi har
-          mottatt produktbilder og -data fra leverandøren. Fram til da kan du
-          se hele utvalget deres på nettsiden deres, eller be oss om et
+          Konkrete modeller og bilder fra {leverandor.navn} publiseres her så
+          snart vi har mottatt produktdata fra leverandøren. Fram til da kan
+          du se hele utvalget deres på nettsiden deres, eller be oss om et
           tilbud direkte.
         </p>
 
