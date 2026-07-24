@@ -14,6 +14,12 @@ export default function TilbudSkjema() {
 
   const erLokalt = lokaleOmrader.includes(kommune);
 
+  const minDato = (() => {
+    const iMorgen = new Date();
+    iMorgen.setDate(iMorgen.getDate() + 1);
+    return iMorgen.toISOString().split("T")[0];
+  })();
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("sender");
@@ -78,8 +84,8 @@ export default function TilbudSkjema() {
       >
         <h3 style={{ margin: "0 0 8px 0" }}>Takk for forespørselen!</h3>
         <p style={{ margin: 0 }}>
-          Vi går gjennom henvendelsen og tar kontakt for å avtale videre
-          befaring.
+          Vi går gjennom henvendelsen og bekrefter befaringstidspunktet med
+          deg på telefon eller e-post.
         </p>
       </div>
     );
@@ -263,6 +269,65 @@ export default function TilbudSkjema() {
             accept="image/*"
             multiple
           />
+        </div>
+      </div>
+
+      {/* Befaring */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+          padding: "20px",
+          borderRadius: "12px",
+          backgroundColor: "#f8fafc",
+          border: "1px solid #e5e7eb",
+        }}
+      >
+        <div>
+          <h3 style={{ margin: "0 0 4px 0", fontSize: "15px", color: "#0f172a" }}>
+            Book befaring (valgfritt)
+          </h3>
+          <p style={{ margin: 0, fontSize: "13px", color: "#6b7280" }}>
+            Foreslå en dato som passer for deg, så bekrefter vi tidspunktet.
+          </p>
+        </div>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+            gap: "18px",
+          }}
+        >
+          <div>
+            <label style={labelStyle} htmlFor="onsketDato">
+              Ønsket dato
+            </label>
+            <input
+              style={inputStyle}
+              type="date"
+              id="onsketDato"
+              name="onsketDato"
+              min={minDato}
+            />
+          </div>
+
+          <div>
+            <label style={labelStyle} htmlFor="onsketTidspunkt">
+              Ønsket tidspunkt
+            </label>
+            <select
+              style={inputStyle}
+              id="onsketTidspunkt"
+              name="onsketTidspunkt"
+              defaultValue="Fleksibel"
+            >
+              <option value="Formiddag (08–12)">Formiddag (08–12)</option>
+              <option value="Ettermiddag (12–16)">Ettermiddag (12–16)</option>
+              <option value="Fleksibel">Fleksibel</option>
+            </select>
+          </div>
         </div>
       </div>
 

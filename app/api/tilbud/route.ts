@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
   const type = form.get("type")?.toString() ?? "";
   const antallOgMal = form.get("antallOgMal")?.toString() ?? "";
   const onskerMontering = form.get("onskerMontering")?.toString() === "true";
+  const onsketDato = form.get("onsketDato")?.toString() ?? "";
+  const onsketTidspunkt = form.get("onsketTidspunkt")?.toString() ?? "";
   const melding = form.get("melding")?.toString() ?? "";
   const bilder = form
     .getAll("bilder")
@@ -77,6 +79,8 @@ export async function POST(request: NextRequest) {
         `Type: ${type}`,
         `Ønsker montering: ${erLokalt && onskerMontering ? "Ja" : "Nei"}`,
         `Omtrentlig mål/antall: ${antallOgMal || "(ikke oppgitt)"}`,
+        `Ønsket dato for befaring: ${onsketDato || "(ikke oppgitt)"}`,
+        `Ønsket tidspunkt: ${onsketTidspunkt || "(ikke oppgitt)"}`,
         `Melding: ${melding || "(ingen)"}`,
         `Antall vedlagte bilder: ${attachments.length}`,
       ].join("\n"),
