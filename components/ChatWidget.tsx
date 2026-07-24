@@ -18,11 +18,22 @@ export default function ChatWidget() {
   ]);
   const [input, setInput] = useState("");
   const [sender, setSender] = useState(false);
+  const [visTeaser, setVisTeaser] = useState(false);
   const bunnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     bunnRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [meldinger, apen]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisTeaser(true), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  function apneChat() {
+    setApen(true);
+    setVisTeaser(false);
+  }
 
   async function sendMelding(event: React.FormEvent) {
     event.preventDefault();
@@ -186,9 +197,55 @@ export default function ChatWidget() {
         </div>
       )}
 
+      {visTeaser && !apen && (
+        <div
+          style={{
+            position: "absolute",
+            bottom: "68px",
+            right: "0",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            backgroundColor: "white",
+            color: "#0f172a",
+            padding: "10px 14px",
+            borderRadius: "999px",
+            boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
+            border: "1px solid #e5e7eb",
+            fontSize: "14px",
+            fontWeight: "bold",
+            whiteSpace: "nowrap",
+            cursor: "pointer",
+            animation: "chat-teaser-inn 0.3s ease-out",
+          }}
+          onClick={apneChat}
+        >
+          Bruk vår AI for spørsmål! 💬
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setVisTeaser(false);
+            }}
+            aria-label="Lukk"
+            style={{
+              background: "none",
+              border: "none",
+              color: "#9ca3af",
+              fontSize: "14px",
+              cursor: "pointer",
+              padding: "0 0 0 4px",
+              lineHeight: 1,
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       <button
         type="button"
-        onClick={() => setApen((v) => !v)}
+        onClick={() => (apen ? setApen(false) : apneChat())}
         aria-label={apen ? "Lukk chat" : "Åpne chat"}
         style={{
           width: "56px",
